@@ -16,17 +16,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        findViewById(R.id.btDownload).setOnClickListener(v->{
+        findViewById(R.id.btDownload).setOnClickListener(v -> {
             Intent service = new Intent(MainActivity.this, DownLoadService.class);
-            service.putExtra("downloadurl", "http://www.51yi.org/app/Volunteer.apk");
-            RxPermissions.getInstance(MainActivity.this).request(Manifest.permission.WRITE_EXTERNAL_STORAGE).subscribe(granted -> {
-                if (granted) {
-                    Toast.makeText(MainActivity.this,"正在下载中",Toast.LENGTH_SHORT).show();
-                    startService(service);
-                } else {
-                    Toast.makeText(MainActivity.this,"SD卡下载权限被拒绝",Toast.LENGTH_SHORT).show();
-                }
-            });
+//            service.putExtra("downloadurl", "http://www.51yi.org/app/Volunteer.apk");
+            service.putExtra("downloadurl", "http://gftoutiao.com/app-XianXia2.0.1.apk");
+            RxPermissions.getInstance(MainActivity.this)
+                    .request(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    .subscribe(granted -> {
+                        if (granted) {
+                            Toast.makeText(MainActivity.this, "正在下载中", Toast.LENGTH_SHORT).show();
+                            startService(service);
+                        } else {
+                            Toast.makeText(MainActivity.this, "SD卡下载权限被拒绝", Toast.LENGTH_SHORT).show();
+                        }
+                    });
         });
     }
 
